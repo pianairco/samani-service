@@ -18,31 +18,8 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter /*implement
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/user").hasRole("user")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-//                .loginPage("/login.html")
-//                .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/homepage.html")
-//                .failureUrl("/login.html?error=true")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                .antMatchers("/").permitAll();
     }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password(passwordEncoder().encode("123456")).roles("USER");
-    }
-
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/login").setViewName("login.html");
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
